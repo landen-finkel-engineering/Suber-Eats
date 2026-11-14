@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelRules" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/level/level_rules.gd" id="1_rules"]
+
+[resource]
+script = ExtResource("1_rules")
+time_limit = 5.0
+min_hits = 0
+max_hits = 2
+ufos_to_beat = -1

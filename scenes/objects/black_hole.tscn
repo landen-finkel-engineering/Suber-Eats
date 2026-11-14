@@ -8,10 +8,9 @@ radius = 70.0
 
 [node name="BlackHole" type="Area2D" groups=["black_holes"]]
 script = ExtResource("1_hole")
-texture = ExtResource("2_hole")
-core_radius = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hole")
 offset = Vector2(-1.5, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

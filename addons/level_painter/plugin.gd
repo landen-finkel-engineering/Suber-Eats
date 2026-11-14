@@ -1,23 +1,22 @@
 @tool
 extends EditorPlugin
 
-# Level Painter: open a level, turn on Paint, pick a type and a picture,
-# click to place, right-click to erase. Ctrl/Cmd+Z undoes.
-
 const SCENES = {
 	"Solid": "res://scenes/objects/bouncer.tscn",
-	"Bounce": "res://scenes/objects/bouncer.tscn",
 	"Slide": "res://scenes/objects/bouncer.tscn",
+	"Red trampoline": "res://scenes/objects/bouncer.tscn",
+	"Green trampoline": "res://scenes/objects/bouncer.tscn",
+	"Blue trampoline": "res://scenes/objects/bouncer.tscn",
 	"Black hole": "res://scenes/objects/black_hole.tscn",
 	"UFO": "res://scenes/enemies/ufo.tscn",
 }
-# bounce, friction
-const FEEL = {"Solid": [0.6, 0.8], "Bounce": [1.3, 0.95], "Slide": [0.15, 1.0]}
-# picture used when "(default)" is picked
-const DEFAULT_PICTURES = {"Bounce": "res://assets/graphics/unorganized/trampoline.png"}
-const TYPES = ["Solid", "Bounce", "Slide", "Black hole", "UFO", "Goal", "Rico"]
+const FEEL = {"Solid": [0.6, 0.8], "Slide": [0.15, 1.0]}
+const TRAMPOLINES = ["Red trampoline", "Green trampoline", "Blue trampoline"]
+const TYPES = ["Solid", "Slide", "Red trampoline", "Green trampoline", "Blue trampoline", "Black hole", "UFO", "Goal", "Rico"]
+const RULES = ["time_limit", "min_hits", "max_hits", "ufos_to_beat"]
 
 var dock
+var rules_dock
 var paint
 var type_list
 var picture_list
@@ -46,13 +45,49 @@ func _enter_tree():
 	add_control_to_dock(DOCK_SLOT_RIGHT_UL, dock)
 	load_pictures()
 
+	rules_dock = ScrollContainer.new()
+	rules_dock.name = "Level Rules"
+	add_control_to_dock(DOCK_SLOT_RIGHT_UL, rules_dock)
+	load_rules()
+
 
 func _exit_tree():
 	remove_control_from_docks(dock)
+	remove_control_from_docks(rules_dock)
 	dock.free()
+	rules_dock.free()
 
 
-# every png in assets/graphics
+func load_rules():
+	for child in rules_dock.get_children():
+		child.free()
+	var grid = GridContainer.new()
+	grid.columns = 5
+	rules_dock.add_child(grid)
+	for heading in ["Level", "Time (s)", "Min hits", "Max hits\n0 = none", "UFOs\n-1 = all"]:
+		var label = Label.new()
+		label.text = heading
+		grid.add_child(label)
+	for file in DirAccess.get_files_at("res://data/levels"):
+		if not file.ends_with(".tres"):
+			continue
+		var rules = load("res://data/levels/" + file)
+		var label = Label.new()
+		label.text = str(file.to_int())
+		grid.add_child(label)
+		for key in RULES:
+			var box = SpinBox.new()
+			box.min_value = -1
+			box.max_value = 999
+			box.step = 0.5 if key == "time_limit" else 1
+			box.value = rules.get(key)
+			box.value_changed.connect(func(v):
+				rules.set(key, v)
+				ResourceSaver.save(rules)
+			)
+			grid.add_child(box)
+
+
 func load_pictures():
 	pictures = []
 	find_pngs("res://assets/graphics")
@@ -76,11 +111,9 @@ func level():
 	var root = EditorInterface.get_edited_scene_root()
 	if root and root.scene_file_path.begins_with("res://scenes/levels/"):
 		return root
-	return null
 
 
 func _on_paint_toggled(on):
-	# clicks only reach the painter while something in the level is selected
 	if on and level():
 		EditorInterface.get_selection().clear()
 		EditorInterface.get_selection().add_node(level())
@@ -91,17 +124,16 @@ func _handles(object):
 
 
 func _forward_canvas_gui_input(event):
-	if not paint.button_pressed or level() == null:
+	if not paint.button_pressed or level() == null or not event is InputEventMouseButton or not event.pressed:
 		return false
-	if event is InputEventMouseButton and event.pressed:
-		var pos = EditorInterface.get_editor_viewport_2d().global_canvas_transform.affine_inverse() * event.position
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			place(TYPES[type_list.selected], pos.snapped(Vector2(8, 8)), selected_picture())
-			return true
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			erase(pos)
-			return true
-	return false
+	var pos = EditorInterface.get_editor_viewport_2d().global_canvas_transform.affine_inverse() * event.position
+	if event.button_index == MOUSE_BUTTON_LEFT:
+		place(TYPES[type_list.selected], pos.snapped(Vector2(8, 8)), selected_picture())
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		erase(pos)
+	else:
+		return false
+	return true
 
 
 func selected_picture():
@@ -114,8 +146,6 @@ func selected_picture():
 func place(type, pos, picture):
 	var root = level()
 	var undo = get_undo_redo()
-
-	# there's only one Goal and one Rico, so move them
 	if type == "Goal" or type == "Rico":
 		var node = root.get_node(type)
 		undo.create_action("Move " + type)
@@ -130,16 +160,16 @@ func place(type, pos, picture):
 	var node = load(SCENES[type]).instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
 	node.name = type.replace(" ", "")
 	node.position = pos
-	if picture == null and type in DEFAULT_PICTURES:
-		picture = load(DEFAULT_PICTURES[type])
-	if picture:
-		node.texture = picture
-		# planets get a round hit box, everything else a box
-		if type in FEEL:
-			node.round = picture.resource_path.get_file().begins_with("planet")
+	if type in TRAMPOLINES:
+		node.texture = load("res://assets/graphics/unorganized/trampoline.png")
+		node.trampoline = TRAMPOLINES.find(type) + 1
+		node.round = false
 	if type in FEEL:
 		node.bounce = FEEL[type][0]
 		node.friction = FEEL[type][1]
+	if picture and "texture" in node:
+		node.texture = picture
+		node.round = picture.resource_path.get_file().begins_with("planet")
 	var parent = root.get_node("Objects")
 	undo.create_action("Paint " + type)
 	undo.add_do_method(parent, "add_child", node, true)
@@ -154,10 +184,8 @@ func erase(pos):
 	var objects = root.get_node("Objects").get_children()
 	objects.reverse()
 	for node in objects:
-		var rect = Rect2(-8, -8, 16, 16)
-		if node.texture:
-			rect = Rect2(-node.texture.get_size() / 2, node.texture.get_size())
-		if not rect.has_point(node.to_local(pos)):
+		var sprite = node.get_node("Sprite2D")
+		if not sprite.get_rect().has_point(sprite.to_local(pos)):
 			continue
 		var undo = get_undo_redo()
 		undo.create_action("Erase " + node.name)

@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.7")
 
 Hand="*res://scripts/hand_tracking/hand.gd"
 Sound="*res://scripts/autoload/sound.gd"
+Progress="*res://scripts/autoload/progress.gd"
 
 [display]
 

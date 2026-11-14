@@ -1,8 +1,6 @@
 @tool
 extends Area2D
 
-# Where Rico delivers the food.
-
 @export var texture: Texture2D:
 	set(value):
 		texture = value
@@ -12,8 +10,6 @@ extends Area2D
 
 func _ready():
 	$Sprite2D.texture = texture
-	if Engine.is_editor_hint() or texture == null:
-		return
-	var shape = CircleShape2D.new()
-	shape.radius = min(texture.get_width(), texture.get_height()) * 0.45
-	$CollisionShape2D.shape = shape
+	if texture and not Engine.is_editor_hint():
+		$CollisionShape2D.shape = CircleShape2D.new()
+		$CollisionShape2D.shape.radius = min(texture.get_width(), texture.get_height()) * 0.45

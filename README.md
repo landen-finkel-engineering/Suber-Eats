@@ -61,15 +61,17 @@ All in `assets/graphics/unorganized/`, names unchanged:
 - rico1-3: Rico's idle animation (bag), rico1-blink: his blink (a .png copy of the .gif)
 - platform-1 / platform-2: Rico's launch pad, flipping between them so the flames flicker
 - Suber Eats house-export: the delivery goal
-- planet2: default Solid and Slide object (round hit box)
-- trampoline: default Bounce object
+- planet2: Solid and Slide objects (round hit box)
+- trampoline: red, green and blue trampolines (colored by a shader, png unchanged)
+- ufo, beam-1/2/3/ful: the UFO and its beam animation
+- cursor-open / cursor-closed: the hand cursor, closed while pinching
 - Suber Eats Black Hole: the black hole
 - logo: title screen
-- Phone Blank: the results screen
+- Phone Blank and rico1: the results phone (Rico, stars, delivery map)
 - bg-UNFINISHED: background of the title and every level
 - button-template-single: all buttons (left/middle/right aren't needed, the single one stretches)
 
-Still missing: UFO art.
+Not used: car (not part of the game yet).
 
 ## Sounds
 
@@ -82,3 +84,8 @@ All in `scripts/autoload/sound.gd`:
 - delivery: doorbell, then you-win on the results screen
 - death: Dying SFX (or Dying to Black Hole), then a random Ragebait line
 - not used yet: car alarm, the old freesound grunt
+
+## Credits
+
+- Camera color shaders in `scripts/hand_tracking/` are from the GDMP demo by Jason Kuo (MIT License)
+- Silkscreen font: Open Font License, see `assets/fonts/silkscreen_OFL.txt`

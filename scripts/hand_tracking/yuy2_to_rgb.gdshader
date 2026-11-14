@@ -1,4 +1,3 @@
-// from the GDMP demo (github.com/j20001970/GDMP-demo), MIT License
 shader_type canvas_item;
 
 const mat3 yuv2rgb_bt709 = mat3(
