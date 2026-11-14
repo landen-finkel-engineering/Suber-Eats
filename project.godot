@@ -12,8 +12,15 @@ config_version=5
 
 config/name="Suber-Out"
 config/description="A 2D pixel art game."
-run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.4")
+run/main_scene="res://scenes/ui/title.tscn"
+config/features=PackedStringArray("4.7")
+
+[autoload]
+
+Hand="*res://scripts/hand_tracking/hand.gd"
+Sound="*res://scripts/autoload/sound.gd"
+Progress="*res://scripts/autoload/progress.gd"
+Transition="*res://scripts/autoload/transition.gd"
 
 [display]
 
@@ -21,11 +28,20 @@ window/size/viewport_width=320
 window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/custom="res://scenes/ui/theme.tres"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.05, 0.04, 0.12, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/level_painter/plugin.cfg")

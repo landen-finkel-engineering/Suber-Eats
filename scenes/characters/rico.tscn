@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/rico.gd" id="1_rico"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico1.png" id="2_r1"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico2.png" id="3_r2"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico3.png" id="4_r3"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico1-blink.png" id="5_blink"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/platform-1.png" id="6_pad1"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/platform-2.png" id="7_pad2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_pad1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pad2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rico"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_blink")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_r3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rico"]
+radius = 10.0
+
+[node name="Rico" type="CharacterBody2D"]
+script = ExtResource("1_rico")
+
+[node name="LaunchPad" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_pad")
+autoplay = "default"
+centered = false
+offset = Vector2(-32, 13)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rico")
+autoplay = "default"
+centered = false
+offset = Vector2(-14, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rico")

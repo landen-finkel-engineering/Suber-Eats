@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/title.gd" id="1_title"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/bg-UNFINISHED.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/logo.png" id="3_logo"]
+[ext_resource type="PackedScene" path="res://scenes/characters/rico.tscn" id="4_rico"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Suber Eats house-export.png" id="5_house"]
+[ext_resource type="Script" path="res://scripts/ui/button.gd" id="6_button"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/planet2.png" id="7_planet"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_title")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -10
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 224.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("3_logo")
+expand_mode = 1
+
+[node name="Rico" parent="." instance=ExtResource("4_rico")]
+position = Vector2(112, 92)
+
+[node name="Planet" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 98.0
+offset_right = 280.0
+offset_bottom = 162.0
+mouse_filter = 2
+texture = ExtResource("7_planet")
+expand_mode = 1
+
+[node name="House" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 70.0
+offset_right = 264.0
+offset_bottom = 102.0
+mouse_filter = 2
+texture = ExtResource("5_house")
+
+[node name="Start" type="Button" parent="."]
+script = ExtResource("6_button")
+layout_mode = 0
+offset_left = 110.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 164.0
+action_mode = 0
+text = "START"
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 167.0
+offset_right = 316.0
+offset_bottom = 178.0
+clip_text = true
+
+[node name="Camera" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 4.0
+offset_right = 316.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

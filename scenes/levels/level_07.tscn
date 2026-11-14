@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/level/level.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="2_goal"]
+[ext_resource type="PackedScene" path="res://scenes/characters/rico.tscn" id="3_rico"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/bg-UNFINISHED.png" id="5_bg"]
+[ext_resource type="Resource" path="res://data/levels/level_07.tres" id="6_rules"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bouncer.tscn" id="7_bouncer"]
+[ext_resource type="PackedScene" path="res://scenes/objects/car.tscn" id="8_car"]
+[ext_resource type="PackedScene" path="res://scenes/objects/black_hole.tscn" id="9_hole"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/ufo.tscn" id="10_ufo"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/trampoline.png" id="11_tramp"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/asteroid-belt.png" id="12_belt"]
+
+[node name="Level07" type="Node2D"]
+script = ExtResource("1_level")
+level_name = "Car Alarm"
+rules = ExtResource("6_rules")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+texture = ExtResource("5_bg")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Car" parent="Objects" instance=ExtResource("8_car")]
+position = Vector2(300, 315)
+
+[node name="AsteroidBelt" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(440, 330)
+texture = ExtResource("12_belt")
+
+[node name="AsteroidBelt2" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(440, 266)
+texture = ExtResource("12_belt")
+
+[node name="AsteroidBelt3" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(440, 202)
+texture = ExtResource("12_belt")
+
+[node name="AsteroidBelt4" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(440, 138)
+texture = ExtResource("12_belt")
+
+[node name="Trampoline" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(160, 330)
+rotation = -0.436332
+texture = ExtResource("11_tramp")
+
+[node name="Goal" parent="." instance=ExtResource("2_goal")]
+position = Vector2(565, 260)
+hue = 216.0
+
+[node name="Rico" parent="." instance=ExtResource("3_rico")]
+position = Vector2(70, 250)
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
