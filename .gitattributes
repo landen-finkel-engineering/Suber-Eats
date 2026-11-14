@@ -1,0 +1,24 @@
+# Keep line endings consistent across Windows/Mac/Linux (Godot's recommended setting)
+* text=auto eol=lf
+
+# Godot text files
+*.gd text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.godot text eol=lf
+*.import text eol=lf
+
+# Graphics, audio and fonts: never try to merge or change line endings
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.aseprite binary
+*.ase binary
+*.psd binary
+*.kra binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.ttf binary
+*.otf binary

@@ -1,0 +1,27 @@
+# Godot 4 cache and import data (rebuilt automatically when you open the project)
+.godot/
+/android/
+
+# Exported game builds (share builds through GitHub Releases, not commits)
+/builds/
+/export/
+*.exe
+*.pck
+*.apk
+*.x86_64
+*.dmg
+
+# Mono / C# (only matters if you switch to the .NET version of Godot)
+.mono/
+data_*/
+mono_crash.*.json
+
+# Editor and OS junk
+.vscode/
+.idea/
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
