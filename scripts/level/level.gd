@@ -34,6 +34,7 @@ func _ready():
 	for ufo in ufos:
 		ufo.defeated.connect(_on_ufo_defeated)
 	hud.level = self
+	Sound.music(false)
 	Sound.play("order")
 
 

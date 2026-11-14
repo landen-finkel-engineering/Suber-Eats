@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/title.gd" id="1_title"]
-[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico1.png" id="2_rico"]
-[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Suber Eats house-export.png" id="3_house"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/bg-UNFINISHED.png" id="2_bg"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/logo.png" id="3_logo"]
+[ext_resource type="PackedScene" path="res://scenes/characters/rico.tscn" id="4_rico"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Suber Eats house-export.png" id="5_house"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -13,47 +15,45 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_title")
 
-[node name="Name" type="Label" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+z_index = -10
 layout_mode = 0
-offset_top = 24.0
 offset_right = 320.0
-offset_bottom = 48.0
-theme_override_font_sizes/font_size = 24
-text = "SUBER-OUT"
-horizontal_alignment = 1
+offset_bottom = 180.0
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
 
-[node name="Rico" type="TextureRect" parent="."]
+[node name="Logo" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 110.0
-offset_top = 60.0
-offset_right = 138.0
-offset_bottom = 87.0
-texture = ExtResource("2_rico")
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 224.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("3_logo")
+expand_mode = 1
+
+[node name="Rico" parent="." instance=ExtResource("4_rico")]
+position = Vector2(112, 92)
 
 [node name="House" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 180.0
-offset_top = 56.0
-offset_right = 212.0
-offset_bottom = 88.0
-texture = ExtResource("3_house")
+offset_left = 192.0
+offset_top = 88.0
+offset_right = 224.0
+offset_bottom = 120.0
+mouse_filter = 2
+texture = ExtResource("5_house")
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 0
 offset_left = 110.0
-offset_top = 104.0
+offset_top = 140.0
 offset_right = 210.0
-offset_bottom = 132.0
+offset_bottom = 164.0
 action_mode = 0
 text = "START"
-
-[node name="Hint" type="Label" parent="."]
-layout_mode = 0
-offset_top = 138.0
-offset_right = 320.0
-offset_bottom = 150.0
-text = "Pinch the button to start"
-horizontal_alignment = 1
 
 [node name="Status" type="Label" parent="."]
 layout_mode = 0

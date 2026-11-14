@@ -31,11 +31,15 @@ var last_hit
 var last_hit_time := -1.0
 
 @onready var sprite = $AnimatedSprite2D
+@onready var pad = $LaunchPad
 
 
 func _ready():
 	start_pos = position
 	radius = $CollisionShape2D.shape.radius
+	# the launch pad stays where Rico started when he moves
+	pad.top_level = true
+	pad.global_position = global_position
 	# a pinch still held from pressing a button shouldn't grab Rico
 	was_pinching = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	sprite.animation_finished.connect(func(): sprite.play("default"))
@@ -61,7 +65,8 @@ func reset(pos):
 	pull = Vector2.ZERO
 	scale = Vector2.ONE
 	sprite.transform = Transform2D.IDENTITY
-	show()
+	sprite.show()
+	pad.global_position = global_position
 
 
 func _physics_process(delta):
@@ -155,7 +160,7 @@ func bounce_off(hit):
 func fail(reason):
 	if state == FLYING:
 		state = DONE
-		hide()
+		sprite.hide()
 		lost.emit(reason)
 
 

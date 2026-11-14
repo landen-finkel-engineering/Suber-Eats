@@ -22,7 +22,7 @@ func _ready():
 
 func _process(delta):
 	if not Engine.is_editor_hint():
-		$Sprite2D.rotation += delta * 2
+		$Sprite2D.rotation += delta
 
 
 func pull(point, delta):

@@ -13,6 +13,8 @@ const SCENES = {
 }
 # bounce, friction
 const FEEL = {"Solid": [0.6, 0.8], "Bounce": [1.3, 0.95], "Slide": [0.15, 1.0]}
+# picture used when "(default)" is picked
+const DEFAULT_PICTURES = {"Bounce": "res://assets/graphics/unorganized/trampoline.png"}
 const TYPES = ["Solid", "Bounce", "Slide", "Black hole", "UFO", "Goal", "Rico"]
 
 var dock
@@ -128,12 +130,13 @@ func place(type, pos, picture):
 	var node = load(SCENES[type]).instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
 	node.name = type.replace(" ", "")
 	node.position = pos
+	if picture == null and type in DEFAULT_PICTURES:
+		picture = load(DEFAULT_PICTURES[type])
 	if picture:
 		node.texture = picture
-		# only the platform has thruster frames and flames
-		if type in FEEL and not picture.resource_path.get_file().begins_with("platform"):
-			node.texture2 = null
-			node.flame_height = 0
+		# planets get a round hit box, everything else a box
+		if type in FEEL:
+			node.round = picture.resource_path.get_file().begins_with("planet")
 	if type in FEEL:
 		node.bounce = FEEL[type][0]
 		node.friction = FEEL[type][1]

@@ -38,12 +38,15 @@ func show_message(text):
 
 func show_results(time_star, objects_star, ufo_star):
 	var stars = [time_star, objects_star, ufo_star].count(true)
-	var lines = ["DELIVERED!  %d / 3 STARS" % stars]
-	lines.append(("[*] " if time_star else "[ ] ") + "Time %.1f (goal %.1f)" % [level.time, level.target_time])
-	lines.append(("[*] " if objects_star else "[ ] ") + "Objects %d (goal %d)" % [level.objects_used, level.max_objects])
-	lines.append(("[*] " if ufo_star else "[ ] ") + "UFOs %d / %d" % [level.ufos_beaten, level.ufos.size()])
-	$Results/Panel/List/Text.text = "\n".join(lines)
-	$Results/Panel/List/Next.visible = level.next_level() != ""
+	var mark = func(got): return "* " if got else "- "
+	$Results/Phone/List/Text.text = "\n".join([
+		"DELIVERED!",
+		"%d/3 STARS" % stars,
+		mark.call(time_star) + "TIME %.1f/%.0f" % [level.time, level.target_time],
+		mark.call(objects_star) + "OBJ %d/%d" % [level.objects_used, level.max_objects],
+		mark.call(ufo_star) + "UFOS %d/%d" % [level.ufos_beaten, level.ufos.size()],
+	])
+	$Results/Phone/List/Next.visible = level.next_level() != ""
 	$Results.show()
 
 

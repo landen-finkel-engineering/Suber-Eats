@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="2_goal"]
 [ext_resource type="PackedScene" path="res://scenes/characters/rico.tscn" id="3_rico"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/bg-UNFINISHED.png" id="6_bg"]
 
 [node name="Level02" type="Node2D"]
 script = ExtResource("1_level")
 level_name = "Level 2"
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_bg")
+centered = false
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -15,6 +22,6 @@ level_name = "Level 2"
 position = Vector2(270, 90)
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]
-position = Vector2(40, 120)
+position = Vector2(40, 108)
 
 [node name="HUD" parent="." instance=ExtResource("5_hud")]

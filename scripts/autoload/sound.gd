@@ -1,12 +1,12 @@
 extends Node
 
-# Autoloaded as "Sound". Sound.play("doorbell"), Sound.death(false)
+# Autoloaded as "Sound". Sound.play("doorbell"), Sound.death(false), Sound.music(true)
 
 const SFX = "res://assets/audio/sfx/"
 
 var sounds = {
 	"order": preload(SFX + "Suber Eat’s Order.ogg"),
-	"grunt": preload(SFX + "freesound_community-grunt-1-85280.mp3"),
+	"grunt": preload(SFX + "Grunt.wav"),
 	"poof": preload(SFX + "freesound_community-poof-80161.mp3"),
 	"doorbell": preload(SFX + "u_rbsjsi42wd-doorbell-223669.mp3"),
 	"win": preload(SFX + "floraphonic-you-win-sequence-2-183949.mp3"),
@@ -14,18 +14,23 @@ var sounds = {
 	"black_hole": preload(SFX + "Dying to Black Hole.ogg"),
 }
 var ragebait = [
-	preload(SFX + "Ragebait lines.ogg"),
-	preload(SFX + "Ragebait Lines Burger.ogg"),
+	preload(SFX + "Ragebait lines.wav"),
+	preload(SFX + "Ragebait Lines Burger.wav"),
 ]
+var menu_music = preload(SFX + "Main Menu.wav")
 
 var players = []
 var voice = AudioStreamPlayer.new()
+var music_player = AudioStreamPlayer.new()
 var deaths := 0
 
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(voice)
+	add_child(music_player)
+	music_player.stream = menu_music
+	music_player.finished.connect(music_player.play)
 	for i in 4:
 		var p = AudioStreamPlayer.new()
 		add_child(p)
@@ -38,6 +43,13 @@ func play(sound):
 			p.stream = sounds[sound]
 			p.play()
 			return
+
+
+func music(on):
+	if on and not music_player.playing:
+		music_player.play()
+	elif not on:
+		music_player.stop()
 
 
 func stop_all():

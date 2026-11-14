@@ -54,14 +54,31 @@ addons/            GDMP (hand tracking) and Level Painter
 - "No camera" or no prompt: System Settings > Privacy & Security > Camera, turn on Godot, restart Godot.
 - "Plugin didn't load": you probably downloaded a zip. Clone it instead, or run `xattr -dr com.apple.quarantine path/to/Suber-Out` in Terminal.
 
+## Where the team's art is used
+
+All in `assets/graphics/unorganized/`, names unchanged:
+
+- rico1-3: Rico's idle animation (bag), rico1-blink: his blink (a .png copy of the .gif)
+- platform-1 / platform-2: Rico's launch pad, flipping between them so the flames flicker
+- Suber Eats house-export: the delivery goal
+- planet2: default Solid and Slide object (round hit box)
+- trampoline: default Bounce object
+- Suber Eats Black Hole: the black hole
+- logo: title screen
+- Phone Blank: the results screen
+- bg-UNFINISHED: background of the title and every level
+- button-template-single: all buttons (left/middle/right aren't needed, the single one stretches)
+
+Still missing: UFO art.
+
 ## Sounds
 
 All in `scripts/autoload/sound.gd`:
 
+- title screen: Main Menu (loops)
 - level start: Suber Eat's Order
-- launch: grunt
+- launch: Grunt
 - UFO beaten: poof
 - delivery: doorbell, then you-win on the results screen
 - death: Dying SFX (or Dying to Black Hole), then a random Ragebait line
-- car alarm isn't used yet
-
+- not used yet: car alarm, the old freesound grunt
