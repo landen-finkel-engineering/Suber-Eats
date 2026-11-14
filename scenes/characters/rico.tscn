@@ -1,12 +1,21 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/rico.gd" id="1_rico"]
-[ext_resource type="Texture2D" path="res://assets/graphics/sprites/characters/rico1.png" id="2_r1"]
-[ext_resource type="Texture2D" path="res://assets/graphics/sprites/characters/rico2.png" id="3_r2"]
-[ext_resource type="Texture2D" path="res://assets/graphics/sprites/characters/rico3.png" id="4_r3"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico1.png" id="2_r1"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico2.png" id="3_r2"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico3.png" id="4_r3"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico1-blink.png" id="5_blink"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rico"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_blink")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_r1")

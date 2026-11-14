@@ -21,7 +21,7 @@
 
 Solid, Bounce and Slide count as "objects used". Black holes and UFOs don't.
 
-Pictures come from any png in `assets/graphics/`. Add new ones there and click Refresh pictures. "(default)" uses the platform for bouncers and the house for the goal.
+Pictures come from any png in `assets/graphics/`. Add new ones there and click Refresh pictures. "(default)" uses the platform (with its thruster animation) for bouncers and the house for the goal. Rico flies through the platform's flames and bounces off the metal part.
 
 The UFO and black hole don't have art yet, so they're invisible in game. Turn on **Debug > Visible Collision Shapes** (top menu) to see them while testing.
 

@@ -1,7 +1,9 @@
 extends Node
 
 # Webcam hand tracking inside Godot, using the GDMP plugin (Google MediaPipe).
-# Read hand_visible, hand_position (0-1, mirrored) and is_pinching.
+# Autoloaded as "Hand". When a hand is in view it becomes the mouse:
+# moving your hand moves the cursor and pinching is a left click,
+# so buttons and Rico's launch work with nothing else.
 # The hand model downloads the first time (about 8 MB) and is kept after that.
 
 const MODEL_URL = "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task"
@@ -11,7 +13,11 @@ const MODEL_PATH = "user://hand_landmarker.task"
 @export var pinch_on := 0.3
 @export var pinch_off := 0.45
 @export var smoothing := 0.5
+# the part of the camera picture that covers the whole game window
+@export var hand_area := Rect2(0.15, 0.15, 0.7, 0.7)
 
+var enabled := true
+var mouse_down := false
 var hand_visible := false
 var hand_position := Vector2(0.5, 0.5)
 var is_pinching := false
@@ -44,6 +50,23 @@ func _ready():
 
 func camera_texture():
 	return view.get_texture() if feed else null
+
+
+# move the real cursor to the hand and turn pinches into clicks
+func _process(_delta):
+	if not enabled or not hand_visible:
+		return
+	var p = ((hand_position - hand_area.position) / hand_area.size).clamp(Vector2.ZERO, Vector2.ONE)
+	var pos = p * Vector2(get_window().size)
+	Input.warp_mouse(pos)
+	if is_pinching != mouse_down:
+		mouse_down = is_pinching
+		var click = InputEventMouseButton.new()
+		click.button_index = MOUSE_BUTTON_LEFT
+		click.pressed = is_pinching
+		click.position = pos
+		click.global_position = pos
+		Input.parse_input_event(click)
 
 
 func download_model():

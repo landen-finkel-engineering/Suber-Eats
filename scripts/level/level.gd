@@ -26,15 +26,15 @@ func _ready():
 	ufos = get_tree().get_nodes_in_group("ufos")
 	black_holes = get_tree().get_nodes_in_group("black_holes")
 
-	rico.tracker = $HandTracker
-	rico.launched.connect(func(): timer_on = true)
+	rico.launched.connect(_on_rico_launched)
 	rico.bounced.connect(_on_rico_bounced)
 	rico.lost.connect(_on_rico_lost)
 	rico.delivered.connect(_on_rico_delivered)
 	$Goal.body_entered.connect(_on_goal_body_entered)
 	for ufo in ufos:
-		ufo.defeated.connect(func(): ufos_beaten += 1)
+		ufo.defeated.connect(_on_ufo_defeated)
 	hud.level = self
+	Sound.play("order")
 
 
 func _physics_process(delta):
@@ -51,6 +51,16 @@ func _physics_process(delta):
 		rico.fail("Lost in space!")
 
 
+func _on_rico_launched():
+	timer_on = true
+	Sound.play("grunt")
+
+
+func _on_ufo_defeated():
+	ufos_beaten += 1
+	Sound.play("poof")
+
+
 func _on_rico_bounced(body):
 	if body.is_in_group("bouncers"):
 		objects_used += 1
@@ -58,6 +68,7 @@ func _on_rico_bounced(body):
 
 func _on_goal_body_entered(body):
 	if body == rico and rico.flying():
+		Sound.play("doorbell")
 		rico.deliver($Goal)
 
 
@@ -65,6 +76,7 @@ func _on_goal_body_entered(body):
 func _on_rico_lost(reason):
 	timer_on = false
 	hud.show_message(reason)
+	Sound.death(reason.contains("black hole"))
 	await get_tree().create_timer(0.9).timeout
 	restart_attempt()
 
@@ -79,6 +91,7 @@ func restart_attempt():
 
 func _on_rico_delivered():
 	timer_on = false
+	Sound.play("win")
 	hud.show_results(time <= target_time, objects_used <= max_objects, ufos_beaten >= ufos.size())
 
 

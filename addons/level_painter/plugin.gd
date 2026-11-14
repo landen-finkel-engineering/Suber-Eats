@@ -130,6 +130,10 @@ func place(type, pos, picture):
 	node.position = pos
 	if picture:
 		node.texture = picture
+		# only the platform has thruster frames and flames
+		if type in FEEL and not picture.resource_path.get_file().begins_with("platform"):
+			node.texture2 = null
+			node.flame_height = 0
 	if type in FEEL:
 		node.bounce = FEEL[type][0]
 		node.friction = FEEL[type][1]

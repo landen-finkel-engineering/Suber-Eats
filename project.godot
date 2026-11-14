@@ -12,8 +12,13 @@ config_version=5
 
 config/name="Suber-Out"
 config/description="A 2D pixel art game."
-run/main_scene="res://scenes/levels/level_01.tscn"
+run/main_scene="res://scenes/ui/title.tscn"
 config/features=PackedStringArray("4.7")
+
+[autoload]
+
+Hand="*res://scripts/hand_tracking/hand.gd"
+Sound="*res://scripts/autoload/sound.gd"
 
 [display]
 

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-# Pinch (or hold the mouse), pull back, let go.
+# Pinch (the Hand autoload turns that into a mouse press), pull back, let go.
 # Rico stretches toward your hand, then flies the other way.
 
 signal launched
@@ -17,8 +17,6 @@ enum { READY, HOLDING, FLYING, DONE }
 @export var lookback := 0.1
 
 var state = READY
-var tracker
-var use_hand := true
 var start_pos: Vector2
 var radius := 10.0
 
@@ -38,6 +36,17 @@ var last_hit_time := -1.0
 func _ready():
 	start_pos = position
 	radius = $CollisionShape2D.shape.radius
+	# a pinch still held from pressing a button shouldn't grab Rico
+	was_pinching = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	sprite.animation_finished.connect(func(): sprite.play("default"))
+	blink()
+
+
+func blink():
+	while true:
+		await get_tree().create_timer(randf_range(2.0, 4.0)).timeout
+		if state != FLYING:
+			sprite.play("blink")
 
 
 func flying():
@@ -55,18 +64,10 @@ func reset(pos):
 	show()
 
 
-func get_pointer():
-	if use_hand and tracker and tracker.hand_visible:
-		var p = (tracker.hand_position - Vector2(0.15, 0.15)) / 0.7
-		return [p.clamp(Vector2.ZERO, Vector2.ONE) * Vector2(320, 180), tracker.is_pinching]
-	return [get_global_mouse_position(), Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)]
-
-
 func _physics_process(delta):
 	clock += delta
-	var pointer = get_pointer()
-	var pos = pointer[0]
-	var pinching = pointer[1]
+	var pos = get_global_mouse_position()
+	var pinching = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
 	if state == READY and pinching and not was_pinching:
 		state = HOLDING
@@ -93,6 +94,9 @@ func let_go():
 	for h in history:
 		if h[0] <= clock - lookback:
 			aim = h[1]
+	# a really quick flick has no older aim to use
+	if aim.length() < 6:
+		aim = pull
 	if aim.length() < 6:
 		reset(start_pos)
 		return

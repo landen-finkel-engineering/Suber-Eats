@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/level/level.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/objects/goal.tscn" id="2_goal"]
 [ext_resource type="PackedScene" path="res://scenes/characters/rico.tscn" id="3_rico"]
-[ext_resource type="Script" path="res://scripts/hand_tracking/hand_tracker.gd" id="4_hand"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
 
 [node name="Level05" type="Node2D"]
@@ -17,8 +16,5 @@ position = Vector2(270, 90)
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]
 position = Vector2(40, 120)
-
-[node name="HandTracker" type="Node" parent="."]
-script = ExtResource("4_hand")
 
 [node name="HUD" parent="." instance=ExtResource("5_hud")]

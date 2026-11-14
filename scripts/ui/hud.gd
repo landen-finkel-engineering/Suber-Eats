@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-# Esc = pause, C = camera on/off, M = switch hand / mouse
+# Esc = pause, C = camera on/off, M = hand tracking on/off
 
 var level
 
@@ -12,8 +12,8 @@ func _process(_delta):
 	if level.ufos.size() > 0:
 		text += "\nUFOS %d / %d" % [level.ufos_beaten, level.ufos.size()]
 	$Stats.text = text
-	$Status.text = level.get_node("HandTracker").status
-	$Camera.texture = level.get_node("HandTracker").camera_texture()
+	$Status.text = Hand.status
+	$Camera.texture = Hand.camera_texture()
 	if level.rico.state != level.rico.READY:
 		$Hint.hide()
 
@@ -24,8 +24,8 @@ func _unhandled_input(event):
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_C:
 		$Camera.visible = not $Camera.visible
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_M:
-		level.rico.use_hand = not level.rico.use_hand
-		show_message("Hand" if level.rico.use_hand else "Mouse")
+		Hand.enabled = not Hand.enabled
+		show_message("Hand on" if Hand.enabled else "Hand off")
 
 
 func show_message(text):
@@ -59,3 +59,8 @@ func _on_restart_pressed():
 
 func _on_next_pressed():
 	get_tree().change_scene_to_file(level.next_level())
+
+
+func _on_menu_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/ui/title.tscn")
