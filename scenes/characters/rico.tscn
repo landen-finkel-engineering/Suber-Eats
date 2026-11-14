@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/rico.gd" id="1_rico"]
+[ext_resource type="Texture2D" path="res://assets/graphics/sprites/characters/rico1.png" id="2_r1"]
+[ext_resource type="Texture2D" path="res://assets/graphics/sprites/characters/rico2.png" id="3_r2"]
+[ext_resource type="Texture2D" path="res://assets/graphics/sprites/characters/rico3.png" id="4_r3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rico"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_r3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rico"]
+radius = 10.0
+
+[node name="Rico" type="CharacterBody2D"]
+script = ExtResource("1_rico")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rico")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rico")

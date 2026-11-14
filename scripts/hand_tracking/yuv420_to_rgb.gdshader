@@ -1,5 +1,4 @@
-// Converts the camera's YUV picture to normal RGB colors.
-// From the GDMP demo (https://github.com/j20001970/GDMP-demo), MIT License, (c) Jason Kuo.
+// from the GDMP demo (github.com/j20001970/GDMP-demo), MIT License
 shader_type canvas_item;
 
 const mat3 yuv2rgb_bt709 = mat3(

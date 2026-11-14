@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_hud")
+
+[node name="Stats" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 120.0
+offset_bottom = 40.0
+
+[node name="Camera" type="TextureRect" parent="."]
+offset_left = 256.0
+offset_top = 4.0
+offset_right = 316.0
+offset_bottom = 49.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Hint" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 156.0
+offset_right = 316.0
+offset_bottom = 167.0
+text = "Pinch (or hold the mouse), pull back, let go!"
+
+[node name="Status" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 167.0
+offset_right = 316.0
+offset_bottom = 178.0
+clip_text = true
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Results" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Results"]
+layout_mode = 2
+
+[node name="List" type="VBoxContainer" parent="Results/Panel"]
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Results/Panel/List"]
+layout_mode = 2
+
+[node name="Next" type="Button" parent="Results/Panel/List"]
+layout_mode = 2
+text = "Next level"
+
+[node name="Retry" type="Button" parent="Results/Panel/List"]
+layout_mode = 2
+text = "Try again"
+
+[node name="Pause" type="CenterContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Pause"]
+layout_mode = 2
+
+[node name="List" type="VBoxContainer" parent="Pause/Panel"]
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Pause/Panel/List"]
+layout_mode = 2
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Pause/Panel/List"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Pause/Panel/List"]
+layout_mode = 2
+text = "Restart level"
+
+[connection signal="pressed" from="Results/Panel/List/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Results/Panel/List/Retry" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Pause/Panel/List/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause/Panel/List/Restart" to="." method="_on_restart_pressed"]
