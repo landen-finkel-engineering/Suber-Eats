@@ -29,16 +29,19 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="Objects" type="Node2D" parent="."]
 
+[node name="AsteroidBelt" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(330, 330)
+texture = ExtResource("12_belt")
+
 [node name="Trampoline" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(300, 330)
+position = Vector2(200, 335)
 texture = ExtResource("11_tramp")
-round = false
 
 [node name="Goal" parent="." instance=ExtResource("2_goal")]
-position = Vector2(530, 300)
+position = Vector2(545, 320)
 hue = 0.0
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]
-position = Vector2(80, 240)
+position = Vector2(80, 250)
 
 [node name="HUD" parent="." instance=ExtResource("4_hud")]

@@ -30,10 +30,10 @@ zoom = Vector2(0.5, 0.5)
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="BlackHole" parent="Objects" instance=ExtResource("9_hole")]
-position = Vector2(400, 240)
+position = Vector2(390, 250)
 
 [node name="UFO" parent="Objects" instance=ExtResource("10_ufo")]
-position = Vector2(300, 170)
+position = Vector2(290, 160)
 travel = Vector2(140, 0)
 trip_time = 3.5
 
@@ -42,21 +42,19 @@ position = Vector2(470, 330)
 
 [node name="Trampoline" parent="Objects" instance=ExtResource("7_bouncer")]
 position = Vector2(180, 330)
+rotation = -0.349066
 texture = ExtResource("11_tramp")
-round = false
 
 [node name="AsteroidBelt" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(520, 330)
+position = Vector2(480, 330)
 texture = ExtResource("12_belt")
-round = false
 
 [node name="AsteroidBelt2" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(520, 266)
+position = Vector2(480, 266)
 texture = ExtResource("12_belt")
-round = false
 
 [node name="Goal" parent="." instance=ExtResource("2_goal")]
-position = Vector2(585, 130)
+position = Vector2(580, 170)
 hue = 324.0
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]

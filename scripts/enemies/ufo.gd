@@ -2,7 +2,7 @@ extends AnimatableBody2D
 
 @export var travel := Vector2(120, 0)
 @export var trip_time := 3.0
-@export var lift := 110.0
+@export var lift := 220.0
 
 var bounce := 1.0
 var friction := 0.95
@@ -32,7 +32,7 @@ func affect(rico, delta):
 	if dead or not Rect2(-13, 0, 26, 47).has_point($Beam.to_local(rico.global_position)):
 		return
 	var target = Vector2((global_position.x - rico.global_position.x) * 4, -lift)
-	rico.velocity = rico.velocity.move_toward(target, 900 * delta)
+	rico.velocity = rico.velocity.move_toward(target, 1800 * delta)
 	rico.velocity.y -= rico.gravity * delta
 
 

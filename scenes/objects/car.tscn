@@ -16,4 +16,4 @@ texture = ExtResource("2_car")
 
 [node name="Alarm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_alarm")
-volume_db = -12.0
+volume_db = -2.0

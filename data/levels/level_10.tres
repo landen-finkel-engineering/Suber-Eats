@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_rules")
-time_limit = 10.0
+time_limit = 3.0
 min_hits = 0
-max_hits = 3
-ufos_to_beat = -1
+max_hits = 2
+ufos_to_beat = 0

@@ -7,9 +7,8 @@ var lights_on = preload("res://assets/graphics/unorganized/car-2-on.png")
 
 func hit():
 	super()
-	if alarm <= 0:
-		$Alarm.play()
-	alarm = 2.5
+	$Alarm.play()
+	alarm = 1.5
 
 
 func _process(delta):

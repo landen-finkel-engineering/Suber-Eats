@@ -15,7 +15,7 @@
 
 [node name="Level04" type="Node2D"]
 script = ExtResource("1_level")
-level_name = "Up and Over"
+level_name = "Under the Roof"
 rules = ExtResource("6_rules")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -30,30 +30,39 @@ zoom = Vector2(0.5, 0.5)
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="AsteroidBelt" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(440, 330)
+position = Vector2(470, 190)
+rotation = 1.570796
 texture = ExtResource("12_belt")
-round = false
 
 [node name="AsteroidBelt2" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(440, 266)
+position = Vector2(534, 190)
+rotation = 1.570796
 texture = ExtResource("12_belt")
-round = false
 
 [node name="AsteroidBelt3" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(440, 202)
+position = Vector2(598, 190)
+rotation = 1.570796
 texture = ExtResource("12_belt")
-round = false
+
+[node name="AsteroidBelt4" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(380, 330)
+texture = ExtResource("12_belt")
 
 [node name="Trampoline" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(330, 330)
+position = Vector2(240, 330)
+rotation = -0.261799
 texture = ExtResource("11_tramp")
-round = false
+
+[node name="Trampoline2" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(440, 335)
+rotation = 0.174533
+texture = ExtResource("11_tramp")
 
 [node name="Goal" parent="." instance=ExtResource("2_goal")]
-position = Vector2(570, 280)
+position = Vector2(565, 330)
 hue = 108.0
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]
-position = Vector2(70, 260)
+position = Vector2(70, 250)
 
 [node name="HUD" parent="." instance=ExtResource("4_hud")]

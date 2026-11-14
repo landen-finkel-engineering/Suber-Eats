@@ -1,7 +1,7 @@
 extends Area2D
 
-@export var pull_radius := 110.0
-@export var strength := 700.0
+@export var pull_radius := 170.0
+@export var strength := 1200.0
 @export var core_radius := 14.0
 
 

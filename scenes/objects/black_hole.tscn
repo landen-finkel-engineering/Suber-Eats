@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/graphics/unorganized/blackhole.png" id="2_hole"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pull"]
-radius = 110.0
+radius = 170.0
 
 [node name="BlackHole" type="Area2D" groups=["black_holes"]]
 script = ExtResource("1_hole")
