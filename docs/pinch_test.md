@@ -4,7 +4,7 @@ A small test scene for Suber-Out's launch control. **Pinch** your thumb and inde
 
 No camera? **Hold the left mouse button** to pinch, drag back, and let go.
 
-- Scene: `scenes/tests/pinch_test.tscn` (currently set as the main scene, so ▶ runs it)
+- Scene: `scenes/tests/pinch_test.tscn` (open it, then click Run Current Scene or press ⌘R / F6)
 - Test logic: `scripts/tests/pinch_test.gd`
 - Reusable hand tracker: `scripts/hand_tracking/hand_tracker.gd`
 - Plugin: `addons/GDMP/` (macOS Apple Silicon + Intel, Windows)
@@ -18,7 +18,7 @@ No camera? **Hold the left mouse button** to pinch, drag back, and let go.
    - **First time:** in GitHub Desktop, choose File > Clone Repository > URL, paste `https://github.com/landen-finkel-engineering/Suber-Out.git`, and click Clone.
    - **Already cloned:** click **Fetch origin**, then **Pull origin**.
 3. **Open it in Godot.** Start Godot, click **Import**, go into the `Suber-Out` folder, pick `project.godot`, and click **Import & Edit**. The first import takes a little while because the plugin is large. If Godot asks to restart, let it.
-4. **Run it.** Click the **▶ (Run Project)** button at the top right, or press **⌘ B**.
+4. **Run it.** Double-click `scenes/tests/pinch_test.tscn` in FileSystem, then click **Run Current Scene** (clapperboard ▶, top right) or press **⌘ R**.
 5. **Allow the camera.** macOS asks whether Godot can use the camera. Click **Allow**.
 6. **Wait for the hand model.** The first run downloads the hand model (about 8 MB), so you need internet once. The bottom of the screen says *"Camera on (...). Show your hand!"* when it's ready.
 7. **Play.** Hold your hand up so the camera sees it. Pinch, pull back, and let go.

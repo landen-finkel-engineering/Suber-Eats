@@ -17,7 +17,9 @@ Do this once per computer.
      git clone https://github.com/landen-finkel-engineering/Suber-Out.git
      ```
 4. **Open it in Godot.** Open Godot. In the Project Manager, click **Import**, go to the `Suber-Out` folder you just cloned, pick `project.godot`, and click **Import & Edit**. The first time it opens, Godot spends a few seconds importing the assets.
-5. **Press F5** (⌘ B on Mac) or click the ▶ button at the top right to run the game. Right now this opens the **pinch test**: pinch, pull back, and let go to launch Rico, with your hand on camera or the mouse. Full guide: [docs/pinch_test.md](docs/pinch_test.md).
+5. **Press F5** (⌘ B on Mac) or click the ▶ button at the top right to run the game. This starts at **Level 1**: pinch, pull back, and let go to launch Rico, with your hand on camera or the mouse.
+
+**Building levels:** open any `scenes/levels/level_XX.tscn` and use the **Level Painter** tab. Guide: [docs/level_painter.md](docs/level_painter.md). Hand tracking guide: [docs/pinch_test.md](docs/pinch_test.md).
 
 ---
 
