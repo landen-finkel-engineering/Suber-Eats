@@ -11,6 +11,7 @@ func _process(_delta):
 		level.level_name, level.time, r.time_limit, level.objects.size(), level.hits, needed_hits(r),
 		level.ufos_beaten.size(), level.ufos_needed()]
 	$Status.text = Hand.status
+	$Status.visible = not Hand.status.begins_with("Camera on")
 	$Camera.texture = Hand.camera_texture()
 	if level.rico.state != level.rico.READY and $Hint.modulate.a == 1:
 		create_tween().tween_property($Hint, "modulate:a", 0.0, 0.3)

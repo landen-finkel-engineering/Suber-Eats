@@ -41,7 +41,7 @@ texture = ExtResource("11_tramp")
 round = false
 
 [node name="Car" parent="Objects" instance=ExtResource("8_car")]
-position = Vector2(580, 320)
+position = Vector2(540, 320)
 
 [node name="Goal" parent="." instance=ExtResource("2_goal")]
 position = Vector2(580, 90)
