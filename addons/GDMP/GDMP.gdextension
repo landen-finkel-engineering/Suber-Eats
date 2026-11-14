@@ -1,0 +1,12 @@
+[configuration]
+
+entry_symbol = "mediapipe_library_init"
+compatibility_minimum = 4.4
+
+[libraries]
+
+; Only the desktop builds are kept in this repo to keep it small.
+; Need Linux/Android/iOS/Web? Get them from https://github.com/j20001970/GDMP/releases (v0.6).
+macos.arm64 = "res://addons/GDMP/libs/arm64/libGDMP.macos.dylib"
+macos.x86_64 = "res://addons/GDMP/libs/x86_64/libGDMP.macos.dylib"
+windows.x86_64 = "res://addons/GDMP/libs/x86_64/GDMP.windows.dll"

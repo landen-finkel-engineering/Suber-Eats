@@ -17,7 +17,7 @@ Do this once per computer.
      git clone https://github.com/landen-finkel-engineering/Suber-Out.git
      ```
 4. **Open it in Godot.** Open Godot. In the Project Manager, click **Import**, go to the `Suber-Out` folder you just cloned, pick `project.godot`, and click **Import & Edit**. The first time it opens, Godot spends a few seconds importing the assets.
-5. **Press F5** (or the ▶ button at the top right) to run the game. You should see a small "Suber-Out" label.
+5. **Press F5** (⌘ B on Mac) or click the ▶ button at the top right to run the game. Right now this opens the **pinch test**: pinch, pull back, and let go to launch Rico, with your hand on camera or the mouse. Full guide: [docs/pinch_test.md](docs/pinch_test.md).
 
 ---
 
@@ -28,7 +28,8 @@ Suber-Out/
 ├── project.godot          Godot project settings (open this in Godot)
 │
 ├── scenes/                🎬 SCENES (.tscn): levels, characters, UI screens
-│   ├── main.tscn          the scene that runs when you press Play
+│   ├── main.tscn          placeholder start scene
+│   ├── tests/             test scenes, e.g. pinch_test.tscn (runs when you press Play)
 │   ├── levels/
 │   ├── characters/        player.tscn, guard.tscn, ...
 │   ├── objects/           doors, pickups, platforms, ...
@@ -36,6 +37,8 @@ Suber-Out/
 │
 ├── scripts/               💻 CODE (.gd GDScript files)
 │   ├── main.gd
+│   ├── hand_tracking/     camera + hand tracking (HandTracker node)
+│   ├── tests/             code for test scenes
 │   ├── autoload/          global scripts (game state, save data, audio manager)
 │   ├── player/
 │   ├── enemies/
@@ -58,7 +61,7 @@ Suber-Out/
 │       └── sfx/
 │
 ├── art_source/            🖌️ WORKING ART FILES (.aseprite, .psd, .kra); Godot ignores this folder
-├── addons/                Godot plugins from the Asset Library
+├── addons/                Godot plugins (GDMP = MediaPipe hand tracking)
 └── docs/                  design notes, level sketches, to-do lists; Godot ignores this folder
 ```
 
