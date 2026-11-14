@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
 [ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Phone Blank.png" id="2_phone"]
 [ext_resource type="Texture2D" path="res://assets/graphics/unorganized/rico1.png" id="3_rico"]
 [ext_resource type="Script" path="res://scripts/ui/map.gd" id="4_map"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/star-ful.png" id="5_star"]
+[ext_resource type="Script" path="res://scripts/ui/button.gd" id="6_button"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
@@ -93,11 +95,12 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="Star" type="Label" parent="Results/Phone/Stars/Time"]
+[node name="Star" type="TextureRect" parent="Results/Phone/Stars/Time"]
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "*"
-horizontal_alignment = 1
+texture = ExtResource("5_star")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="Results/Phone/Stars/Time"]
 layout_mode = 2
@@ -108,11 +111,12 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="Star" type="Label" parent="Results/Phone/Stars/Hits"]
+[node name="Star" type="TextureRect" parent="Results/Phone/Stars/Hits"]
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "*"
-horizontal_alignment = 1
+texture = ExtResource("5_star")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="Results/Phone/Stars/Hits"]
 layout_mode = 2
@@ -123,11 +127,12 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="Star" type="Label" parent="Results/Phone/Stars/Ufos"]
+[node name="Star" type="TextureRect" parent="Results/Phone/Stars/Ufos"]
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "*"
-horizontal_alignment = 1
+texture = ExtResource("5_star")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="Results/Phone/Stars/Ufos"]
 layout_mode = 2
@@ -152,6 +157,7 @@ offset_bottom = 150.0
 script = ExtResource("4_map")
 
 [node name="Retry" type="Button" parent="Results"]
+script = ExtResource("6_button")
 layout_mode = 0
 offset_left = 40.0
 offset_top = 66.0
@@ -161,6 +167,7 @@ action_mode = 0
 text = "RETRY"
 
 [node name="Menu" type="Button" parent="Results"]
+script = ExtResource("6_button")
 layout_mode = 0
 offset_left = 40.0
 offset_top = 92.0
@@ -170,6 +177,7 @@ action_mode = 0
 text = "MENU"
 
 [node name="Next" type="Button" parent="Results"]
+script = ExtResource("6_button")
 layout_mode = 0
 offset_left = 214.0
 offset_top = 79.0
@@ -198,12 +206,14 @@ text = "PAUSED"
 horizontal_alignment = 1
 
 [node name="Resume" type="Button" parent="Pause/Panel/List"]
+script = ExtResource("6_button")
 custom_minimum_size = Vector2(100, 22)
 layout_mode = 2
 action_mode = 0
 text = "RESUME"
 
 [node name="Restart" type="Button" parent="Pause/Panel/List"]
+script = ExtResource("6_button")
 custom_minimum_size = Vector2(100, 22)
 layout_mode = 2
 action_mode = 0

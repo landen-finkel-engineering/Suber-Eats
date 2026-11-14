@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/title.gd" id="1_title"]
 [ext_resource type="Texture2D" path="res://assets/graphics/unorganized/bg-UNFINISHED.png" id="2_bg"]
 [ext_resource type="Texture2D" path="res://assets/graphics/unorganized/logo.png" id="3_logo"]
 [ext_resource type="PackedScene" path="res://scenes/characters/rico.tscn" id="4_rico"]
 [ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Suber Eats house-export.png" id="5_house"]
+[ext_resource type="Script" path="res://scripts/ui/button.gd" id="6_button"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -47,6 +48,7 @@ mouse_filter = 2
 texture = ExtResource("5_house")
 
 [node name="Start" type="Button" parent="."]
+script = ExtResource("6_button")
 layout_mode = 0
 offset_left = 110.0
 offset_top = 140.0

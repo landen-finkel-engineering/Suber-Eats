@@ -12,4 +12,4 @@ func _ready():
 	$Sprite2D.texture = texture
 	if texture and not Engine.is_editor_hint():
 		$CollisionShape2D.shape = CircleShape2D.new()
-		$CollisionShape2D.shape.radius = min(texture.get_width(), texture.get_height()) * 0.45
+		$CollisionShape2D.shape.radius = min(texture.get_width(), texture.get_height()) * 0.7

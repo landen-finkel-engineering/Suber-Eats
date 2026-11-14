@@ -7,7 +7,7 @@ signal lost(reason)
 
 enum { READY, HOLDING, FLYING, DONE }
 
-@export var max_pull := 60.0
+@export var max_pull := 85.0
 @export var power := 6.0
 @export var gravity := 300.0
 @export var lookback := 0.1
@@ -136,16 +136,17 @@ func bounce_off(hit):
 	var body = hit.get_collider()
 	var n = hit.get_normal()
 	if body.is_in_group("ufos") and n.y > -0.5:
-		capture(body, "Captured by a UFO!")
+		capture(body, "Beamed up!")
 		return
 	var speed_in = -velocity.dot(n)
 	if speed_in <= 0:
 		return
-	var straight = n * velocity.dot(n)
-	velocity = ((velocity - straight) * body.friction - straight * body.bounce).limit_length(max_speed)
+	var along = velocity - n * velocity.dot(n)
+	velocity = (along * body.friction + n * max(speed_in * body.bounce, body.kick)).limit_length(max_speed)
 	if speed_in > 40 and (body != last_hit or clock - last_hit_time > 0.15):
 		last_hit = body
 		last_hit_time = clock
+		create_tween().tween_method(func(a): stretch(n.angle(), a), -0.5, 0.0, 0.15)
 		bounced.emit(body)
 
 
@@ -159,6 +160,21 @@ func fail(reason):
 func capture(by, reason):
 	if state == FLYING:
 		vanish_into(by, lost.emit.bind(reason))
+
+
+func spaghettify(hole):
+	if state != FLYING:
+		return
+	state = DONE
+	var start = global_position - hole.global_position
+	tween = create_tween()
+	tween.tween_method(func(k):
+		var offset = start.rotated(k * TAU * 2) * (1 - k)
+		global_position = hole.global_position + offset
+		stretch(offset.angle(), k * 3)
+		scale = Vector2.ONE * (1 - k * 0.7)
+	, 0.0, 1.0, 1.0).set_ease(Tween.EASE_IN)
+	tween.tween_callback(lost.emit.bind("Spaghettified!"))
 
 
 func deliver(goal):

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/car.gd" id="1_car"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/car-1-off.png" id="2_car"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/freesound_community-car-alarm-raw-43056.mp3" id="3_alarm"]
+
+[node name="Car" type="StaticBody2D" groups=["bouncers"]]
+script = ExtResource("1_car")
+texture = ExtResource("2_car")
+bounce = 0.7
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_car")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Alarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_alarm")
+volume_db = -12.0

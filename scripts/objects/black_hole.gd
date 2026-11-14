@@ -1,8 +1,8 @@
 extends Area2D
 
-@export var pull_radius := 70.0
-@export var strength := 600.0
-@export var core_radius := 10.0
+@export var pull_radius := 110.0
+@export var strength := 700.0
+@export var core_radius := 14.0
 
 
 func _ready():
@@ -11,15 +11,14 @@ func _ready():
 
 
 func _process(delta):
-	$Sprite2D.rotation += delta
+	$Sprite2D.rotation += delta * 0.8
 
 
-func pull(point, delta):
-	var dir = global_position - point
-	if dir.length() > pull_radius or dir == Vector2.ZERO:
-		return Vector2.ZERO
-	return dir.normalized() * strength * (1 - dir.length() / pull_radius) * delta
+func affect(rico, delta):
+	var dir = global_position - rico.global_position
+	if dir.length() < pull_radius:
+		rico.velocity += dir.normalized() * strength * (1 - dir.length() / pull_radius) * delta
 
 
-func swallows(point, rico_radius):
-	return global_position.distance_to(point) < core_radius + rico_radius
+func swallows(rico):
+	return global_position.distance_to(rico.global_position) < core_radius + rico.radius

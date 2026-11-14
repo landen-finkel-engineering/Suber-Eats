@@ -12,8 +12,8 @@ func _process(_delta):
 		level.ufos_beaten.size(), level.ufos_needed()]
 	$Status.text = Hand.status
 	$Camera.texture = Hand.camera_texture()
-	if level.rico.state != level.rico.READY:
-		$Hint.hide()
+	if level.rico.state != level.rico.READY and $Hint.modulate.a == 1:
+		create_tween().tween_property($Hint, "modulate:a", 0.0, 0.3)
 
 
 func needed_hits(r):
@@ -37,8 +37,11 @@ func _unhandled_input(event):
 func show_message(text):
 	$Message.text = text
 	$Message.modulate.a = 1
+	$Message.pivot_offset = $Message.size / 2
+	$Message.scale = Vector2(1.4, 1.4)
 	var tween = create_tween()
-	tween.tween_interval(0.7)
+	tween.tween_property($Message, "scale", Vector2.ONE, 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_interval(0.6)
 	tween.tween_property($Message, "modulate:a", 0.0, 0.3)
 
 
@@ -48,6 +51,8 @@ func show_results(stars):
 	$Results/Phone/Map.queue_redraw()
 	$Results/Next.visible = level.next_level() != ""
 	$Results.show()
+	$Results.position.y = 180
+	create_tween().tween_property($Results, "position:y", 0.0, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 func _on_resume_pressed():
@@ -56,14 +61,12 @@ func _on_resume_pressed():
 
 
 func _on_restart_pressed():
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	Transition.go(level.scene_file_path)
 
 
 func _on_next_pressed():
-	get_tree().change_scene_to_file(level.next_level())
+	Transition.go(level.next_level())
 
 
 func _on_menu_pressed():
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/ui/title.tscn")
+	Transition.go("res://scenes/ui/title.tscn")

@@ -2,7 +2,7 @@ extends Node2D
 
 @export var level_name := "Level 1"
 @export var rules: LevelRules
-@export var play_area := Rect2(-20, -60, 360, 260)
+@export var play_area := Rect2(-60, -220, 760, 620)
 
 var time := 0.0
 var timer_on := false
@@ -12,6 +12,7 @@ var start_pos: Vector2
 
 @onready var rico = $Rico
 @onready var hud = $HUD
+@onready var camera = $Camera2D
 @onready var objects = get_tree().get_nodes_in_group("bouncers")
 @onready var ufos = get_tree().get_nodes_in_group("ufos")
 @onready var black_holes = get_tree().get_nodes_in_group("black_holes")
@@ -35,10 +36,12 @@ func _physics_process(delta):
 	if timer_on:
 		time += delta
 	for thing in black_holes + ufos:
-		rico.velocity += thing.pull(rico.global_position, delta)
+		thing.affect(rico, delta)
 	for hole in black_holes:
-		if hole.swallows(rico.global_position, rico.radius):
-			rico.capture(hole, "Sucked into a black hole!")
+		if hole.swallows(rico):
+			Sound.death(true)
+			shake(4)
+			rico.spaghettify(hole)
 			return
 	if not play_area.has_point(rico.global_position):
 		rico.fail("Lost in space!")
@@ -50,23 +53,34 @@ func _on_rico_launched():
 
 
 func _on_rico_bounced(body):
-	if body.is_in_group("bouncers"):
-		hits += 1
-	elif body.is_in_group("ufos") and body not in ufos_beaten:
+	if body.is_in_group("ufos"):
 		ufos_beaten.append(body)
+		body.destroy()
 		Sound.play("poof")
+		shake(5)
+		hitstop()
+	elif body.is_in_group("bouncers"):
+		hits += 1
+		body.hit()
+		if body.kick:
+			shake(2)
 
 
 func _on_goal_body_entered(body):
 	if body == rico and rico.flying():
 		Sound.play("doorbell")
+		var tween = create_tween()
+		$Goal.scale = Vector2(1.3, 0.8)
+		tween.tween_property($Goal, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		rico.deliver($Goal)
 
 
 func _on_rico_lost(reason):
 	timer_on = false
 	hud.show_message(reason)
-	Sound.death(reason.contains("black hole"))
+	if reason != "Spaghettified!":
+		Sound.death(false)
+		shake(3)
 	await get_tree().create_timer(0.9).timeout
 	restart_attempt()
 
@@ -85,6 +99,16 @@ func _on_rico_delivered():
 	var stars = [time <= rules.time_limit, hits_ok(), ufos_ok()]
 	Progress.finish(number(), stars.count(true))
 	hud.show_results(stars)
+
+
+func shake(amount):
+	create_tween().tween_method(func(a): camera.offset = Vector2(randf_range(-a, a), randf_range(-a, a)), float(amount), 0.0, 0.25)
+
+
+func hitstop():
+	Engine.time_scale = 0.05
+	await get_tree().create_timer(0.07, true, false, true).timeout
+	Engine.time_scale = 1.0
 
 
 func hits_ok():

@@ -22,10 +22,12 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(voice)
 	add_child(music_player)
+	music_player.volume_db = -8
 	music_player.stream = preload(SFX + "Main Menu.wav")
 	music_player.finished.connect(music_player.play)
 	for i in 4:
 		players.append(AudioStreamPlayer.new())
+		players[i].volume_db = -3
 		add_child(players[i])
 
 
@@ -33,6 +35,7 @@ func play(sound):
 	for p in players:
 		if not p.playing:
 			p.stream = sounds[sound]
+			p.pitch_scale = randf_range(0.95, 1.05)
 			p.play()
 			return
 

@@ -2,17 +2,18 @@
 extends EditorPlugin
 
 const SCENES = {
-	"Solid": "res://scenes/objects/bouncer.tscn",
-	"Slide": "res://scenes/objects/bouncer.tscn",
-	"Red trampoline": "res://scenes/objects/bouncer.tscn",
-	"Green trampoline": "res://scenes/objects/bouncer.tscn",
-	"Blue trampoline": "res://scenes/objects/bouncer.tscn",
+	"Planet": "res://scenes/objects/bouncer.tscn",
+	"Trampoline": "res://scenes/objects/bouncer.tscn",
+	"Asteroid belt": "res://scenes/objects/bouncer.tscn",
+	"Car": "res://scenes/objects/car.tscn",
 	"Black hole": "res://scenes/objects/black_hole.tscn",
 	"UFO": "res://scenes/enemies/ufo.tscn",
 }
-const FEEL = {"Solid": [0.6, 0.8], "Slide": [0.15, 1.0]}
-const TRAMPOLINES = ["Red trampoline", "Green trampoline", "Blue trampoline"]
-const TYPES = ["Solid", "Slide", "Red trampoline", "Green trampoline", "Blue trampoline", "Black hole", "UFO", "Goal", "Rico"]
+const PICTURES = {
+	"Trampoline": "res://assets/graphics/unorganized/trampoline.png",
+	"Asteroid belt": "res://assets/graphics/unorganized/asteroid-belt.png",
+}
+const TYPES = ["Planet", "Trampoline", "Asteroid belt", "Car", "Black hole", "UFO", "Goal", "Rico"]
 const RULES = ["time_limit", "min_hits", "max_hits", "ufos_to_beat"]
 
 var dock
@@ -160,13 +161,8 @@ func place(type, pos, picture):
 	var node = load(SCENES[type]).instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
 	node.name = type.replace(" ", "")
 	node.position = pos
-	if type in TRAMPOLINES:
-		node.texture = load("res://assets/graphics/unorganized/trampoline.png")
-		node.trampoline = TRAMPOLINES.find(type) + 1
-		node.round = false
-	if type in FEEL:
-		node.bounce = FEEL[type][0]
-		node.friction = FEEL[type][1]
+	if type in PICTURES and not picture:
+		picture = load(PICTURES[type])
 	if picture and "texture" in node:
 		node.texture = picture
 		node.round = picture.resource_path.get_file().begins_with("planet")
