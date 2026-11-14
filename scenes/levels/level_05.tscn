@@ -40,7 +40,8 @@ texture = ExtResource("11_tramp")
 round = false
 
 [node name="Goal" parent="." instance=ExtResource("2_goal")]
-position = Vector2(565, 260)
+position = Vector2(560, 290)
+hue = 144.0
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]
 position = Vector2(70, 250)

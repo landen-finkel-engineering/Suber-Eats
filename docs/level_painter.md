@@ -10,15 +10,13 @@
 
 | Type | What it does | Counts as a hit? |
 |---|---|---|
-| Solid | planet, normal bounce | yes |
-| Slide | planet, slippery | yes |
-| Red / Green / Blue trampoline | weakest / medium / strongest bounce | yes |
-| Black hole | pulls Rico in, touching the middle kills him | no |
-| UFO | beam underneath sucks Rico up and captures him, landing on top bounces like a green trampoline and beats it | no |
-| Goal | the delivery house (only one, so it moves) | |
+| Trampoline | launches Rico hard | yes |
+| Asteroid belt | a wall (rotate it with E for a ceiling) | yes |
+| Car | bounce, sets off the car alarm | yes |
+| Black hole | pulls Rico in, the middle spaghettifies him | no |
+| UFO | beam lifts Rico up into it (reset), landing on top destroys it | no |
+| Goal | the planet with the house on it (only one, so it moves). Set its Hue in the Inspector | |
 | Rico | where Rico and his launch pad start (only one, so it moves) | |
-
-Trampoline colors come from a shader, the trampoline png isn't changed. You can also change a placed trampoline's color in the Inspector (Trampoline).
 
 ## Level Rules tab
 

@@ -72,7 +72,7 @@ func _on_goal_body_entered(body):
 		var tween = create_tween()
 		$Goal.scale = Vector2(1.3, 0.8)
 		tween.tween_property($Goal, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-		rico.deliver($Goal)
+		rico.deliver($Goal/House)
 
 
 func _on_rico_lost(reason):

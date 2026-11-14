@@ -1,15 +1,20 @@
 @tool
 extends Area2D
 
-@export var texture: Texture2D:
+@export_range(0, 360) var hue := 0.0:
 	set(value):
-		texture = value
+		hue = value
 		if is_node_ready():
-			$Sprite2D.texture = value
+			tint()
 
 
 func _ready():
-	$Sprite2D.texture = texture
-	if texture and not Engine.is_editor_hint():
-		$CollisionShape2D.shape = CircleShape2D.new()
-		$CollisionShape2D.shape.radius = min(texture.get_width(), texture.get_height()) * 0.7
+	tint()
+
+
+func tint():
+	var mat = ShaderMaterial.new()
+	mat.shader = preload("res://scripts/objects/hue.gdshader")
+	mat.set_shader_parameter("hue", hue)
+	$Planet.material = mat
+	$House.material = mat

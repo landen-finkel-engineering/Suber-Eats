@@ -15,7 +15,7 @@
 
 [node name="Level03" type="Node2D"]
 script = ExtResource("1_level")
-level_name = "Planet Hop"
+level_name = "Bounce House"
 rules = ExtResource("6_rules")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -29,16 +29,29 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Planet" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(330, 180)
+[node name="AsteroidBelt" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(420, 330)
+texture = ExtResource("12_belt")
+round = false
+
+[node name="AsteroidBelt2" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(420, 266)
+texture = ExtResource("12_belt")
+round = false
+
+[node name="AsteroidBelt3" parent="Objects" instance=ExtResource("7_bouncer")]
+position = Vector2(420, 202)
+texture = ExtResource("12_belt")
+round = false
 
 [node name="Trampoline" parent="Objects" instance=ExtResource("7_bouncer")]
-position = Vector2(460, 330)
+position = Vector2(300, 330)
 texture = ExtResource("11_tramp")
 round = false
 
 [node name="Goal" parent="." instance=ExtResource("2_goal")]
-position = Vector2(565, 300)
+position = Vector2(555, 120)
+hue = 72.0
 
 [node name="Rico" parent="." instance=ExtResource("3_rico")]
 position = Vector2(70, 250)

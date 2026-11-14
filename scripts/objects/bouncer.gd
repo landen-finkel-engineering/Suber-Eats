@@ -10,7 +10,6 @@ extends StaticBody2D
 @export var bounce := 0.6
 @export var friction := 0.8
 @export var kick := 0.0
-@export var round := false
 
 
 func _ready():
@@ -21,12 +20,8 @@ func _ready():
 		bounce = 1.6
 		kick = 400.0
 	var used = Rect2(texture.get_image().get_used_rect())
-	if round:
-		$CollisionShape2D.shape = CircleShape2D.new()
-		$CollisionShape2D.shape.radius = min(used.size.x, used.size.y) / 2
-	else:
-		$CollisionShape2D.shape = RectangleShape2D.new()
-		$CollisionShape2D.shape.size = used.size
+	$CollisionShape2D.shape = RectangleShape2D.new()
+	$CollisionShape2D.shape.size = used.size
 	$CollisionShape2D.position = used.get_center() - texture.get_size() / 2
 
 

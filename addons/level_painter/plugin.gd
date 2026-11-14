@@ -2,7 +2,6 @@
 extends EditorPlugin
 
 const SCENES = {
-	"Planet": "res://scenes/objects/bouncer.tscn",
 	"Trampoline": "res://scenes/objects/bouncer.tscn",
 	"Asteroid belt": "res://scenes/objects/bouncer.tscn",
 	"Car": "res://scenes/objects/car.tscn",
@@ -13,7 +12,7 @@ const PICTURES = {
 	"Trampoline": "res://assets/graphics/unorganized/trampoline.png",
 	"Asteroid belt": "res://assets/graphics/unorganized/asteroid-belt.png",
 }
-const TYPES = ["Planet", "Trampoline", "Asteroid belt", "Car", "Black hole", "UFO", "Goal", "Rico"]
+const TYPES = ["Trampoline", "Asteroid belt", "Car", "Black hole", "UFO", "Goal", "Rico"]
 const RULES = ["time_limit", "min_hits", "max_hits", "ufos_to_beat"]
 
 var dock
@@ -152,9 +151,6 @@ func place(type, pos, picture):
 		undo.create_action("Move " + type)
 		undo.add_do_property(node, "position", pos)
 		undo.add_undo_property(node, "position", node.position)
-		if type == "Goal" and picture:
-			undo.add_do_property(node, "texture", picture)
-			undo.add_undo_property(node, "texture", node.texture)
 		undo.commit_action()
 		return
 
@@ -165,7 +161,6 @@ func place(type, pos, picture):
 		picture = load(PICTURES[type])
 	if picture and "texture" in node:
 		node.texture = picture
-		node.round = picture.resource_path.get_file().begins_with("planet")
 	var parent = root.get_node("Objects")
 	undo.create_action("Paint " + type)
 	undo.add_do_method(parent, "add_child", node, true)

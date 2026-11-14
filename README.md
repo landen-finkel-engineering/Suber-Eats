@@ -60,9 +60,9 @@ All in `assets/graphics/unorganized/`, names unchanged:
 
 - rico1-3: Rico's idle animation (bag), rico1-blink: his blink (a .png copy of the .gif)
 - platform-1 / platform-2: Rico's launch pad, flipping between them so the flames flicker
-- Suber Eats house-export: the delivery goal
-- planet2: Solid and Slide objects (round hit box)
-- trampoline: red, green and blue trampolines (colored by a shader, png unchanged)
+- Suber Eats house-export + planet2: the delivery goal (house on the planet, colors change per level with a hue shader)
+- trampoline, asteroid-belt, car-1/2: trampolines, walls and the car (alarm)
+- blackhole: the black hole
 - ufo, beam-1/2/3/ful: the UFO and its beam animation
 - cursor-open / cursor-closed: the hand cursor, closed while pinching
 - Suber Eats Black Hole: the black hole

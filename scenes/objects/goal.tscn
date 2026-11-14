@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/objects/goal.gd" id="1_goal"]
-[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Suber Eats house-export.png" id="2_house"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/planet2.png" id="2_planet"]
+[ext_resource type="Texture2D" path="res://assets/graphics/unorganized/Suber Eats house-export.png" id="3_house"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_planet"]
+radius = 62.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_house"]
+size = Vector2(30, 30)
 
 [node name="Goal" type="Area2D"]
 script = ExtResource("1_goal")
-texture = ExtResource("2_house")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Planet" type="Sprite2D" parent="."]
+texture = ExtResource("2_planet")
+
+[node name="House" type="Sprite2D" parent="."]
+position = Vector2(0, -77)
+texture = ExtResource("3_house")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_planet")
+
+[node name="HouseShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -77)
+shape = SubResource("RectangleShape2D_house")
