@@ -31,6 +31,10 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/level_painter/plugin.cfg")
+
 [gui]
 
 theme/custom="res://scenes/ui/theme.tres"
@@ -41,7 +45,3 @@ textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_clear_color=Color(0.05, 0.04, 0.12, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/level_painter/plugin.cfg")

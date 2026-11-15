@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ckidop7ws7jk3"
+path="res://.godot/imported/Dying SFX.ogg-2333c033ca2d848bd7157b1d0e6e5b0f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Dying SFX.ogg"
+dest_files=["res://.godot/imported/Dying SFX.ogg-2333c033ca2d848bd7157b1d0e6e5b0f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
